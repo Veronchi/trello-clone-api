@@ -24,3 +24,18 @@ export interface IUser {
   password: string,
   role: string,
 }
+
+interface BoardAttributes {
+  id: number;
+  name: string;
+  background: string;
+}
+
+type BoardCreationAttributes = Optional<UserAttributes, 'id'>
+
+export interface BoardInstance
+  extends Model<BoardAttributes, BoardCreationAttributes>,
+  UserAttributes {
+      createdAt?: Date;
+      updatedAt?: Date;
+  }

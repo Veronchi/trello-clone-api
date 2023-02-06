@@ -1,5 +1,5 @@
 import { DataTypes } from 'sequelize';
-import { UserInstance } from '../../interface';
+import { BoardInstance, UserInstance } from '../../interface';
 import sequelize from "../../db";
 
 const User = sequelize.define<UserInstance>("User", {
@@ -30,4 +30,26 @@ const User = sequelize.define<UserInstance>("User", {
   },
 });
 
-export { User };
+const Board = sequelize.define<BoardInstance>("User", {
+  id: {
+    type: DataTypes.UUID,
+    defaultValue: DataTypes.UUIDV4,
+    allowNull: false,
+    primaryKey: true,
+  },
+  name: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    unique: true,
+  },
+  background: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    unique: true,
+  }
+});
+
+User.hasMany(Board);
+Board.belongsTo(User);
+
+export { User, Board };
