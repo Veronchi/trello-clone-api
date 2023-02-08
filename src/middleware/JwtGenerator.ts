@@ -1,8 +1,8 @@
 import Jwt from "jsonwebtoken";
 
-function generateJwt(id: number, email: string, role: string): string {
-  return Jwt.sign({ id, email, role }, "11111111222", {
-    expiresIn: "24h",
+function generateJwt(UserId: number, email: string, role: string): string {
+  return Jwt.sign({ UserId, email, role }, "random_secret_key6", {
+    expiresIn: "12h",
   });
 }
 

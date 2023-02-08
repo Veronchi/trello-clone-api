@@ -21,8 +21,6 @@ export default function (role: string) {
         throw ApiError.forbidden("No access");
       }
 
-      req.locals.user = decode;
-
       next();
     } catch (error) {
       next(error);

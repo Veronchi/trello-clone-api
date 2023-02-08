@@ -7,17 +7,20 @@ export default function (req: express.Request, res: express.Response, next: expr
     if (req.method === "OPTIONS") {
       next();
     }
-    const token = req.headers.authorization?.split(" ")[1];
-    
-    if (token === "null") {
-      throw ApiError.forbidden("Unauthorized");
+
+    if(req.headers.authorization == undefined) {
+      throw ApiError.unauthorized("Unauthorized");
+    } else {
+      const token = req.headers.authorization.split(" ")[1];
+  
+      Jwt.verify(token as string, "random_secret_key6", (err, decode): void => {
+        if(err) throw ApiError.unauthorized("Unauthorized");
+        res.locals.decode = decode as JwtPayload;
+      });
+  
+      next();
     }
-
-    const decoded = Jwt.verify(token as string, "random_secret_key6") as JwtPayload;
-
-    req.locals.user = decoded;
-
-    next();
+    
   } catch (error) {
     next(error);
   }

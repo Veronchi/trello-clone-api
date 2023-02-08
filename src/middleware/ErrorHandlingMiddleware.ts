@@ -9,7 +9,5 @@ export default function (
     res.status(err.status).send({
       error: err.message
     })
-  }
-
-  res.status(500).send({error: 'unexpected error'});
+  } else res.status(500).send({error: err});
 }
