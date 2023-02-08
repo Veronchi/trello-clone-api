@@ -1,11 +1,13 @@
 import { JwtPayload } from "jsonwebtoken"
-import { User } from "../resource/common/models"
+import { Board, User } from "../resource/common/models"
 
 declare global{
     namespace Express {
         interface Request {
             locals: {
-                user: typeof User | JwtPayload
+                user: typeof User | JwtPayload;
+                board: typeof Board | JwtPayload;
+                decode: JwtPayload;
             }
         }
     }

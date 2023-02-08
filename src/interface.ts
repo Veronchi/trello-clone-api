@@ -18,24 +18,86 @@ export interface UserInstance
   }
 
 export interface IUser {
-  id: number
-  login: string,
-  email: string,
-  password: string,
-  role: string,
+  id: number;
+  login: string;
+  email: string;
+  password: string;
+  role: string;
+}
+
+export interface IUserId {
+  userID: string
 }
 
 interface BoardAttributes {
   id: number;
-  name: string;
+  title: string;
   background: string;
+  UserId?: string;
 }
 
-type BoardCreationAttributes = Optional<UserAttributes, 'id'>
+type BoardCreationAttributes = Optional<BoardAttributes, 'id'>
 
-export interface BoardInstance
-  extends Model<BoardAttributes, BoardCreationAttributes>,
+export interface BoardInstance 
+  extends Model<BoardAttributes, BoardCreationAttributes>, 
   UserAttributes {
-      createdAt?: Date;
-      updatedAt?: Date;
-  }
+    createdAt?: Date;
+    updatedAt?: Date;
+}
+
+export interface IBoard {
+  id: number;
+  title: string;
+  background: string;
+  UserId: string;
+}
+
+interface ColumnAttributes {
+  id: number;
+  title: string;
+  BoardId?: string;
+}
+
+type ColumnCreationAttributes = Optional<ColumnAttributes, 'id'>
+
+export interface ColumnInstance 
+  extends Model<ColumnAttributes, ColumnCreationAttributes>, 
+  UserAttributes {
+    createdAt?: Date;
+    updatedAt?: Date;
+}
+
+export interface IColumn {
+  id: number;
+  title: string;
+  BoardId: string;
+}
+
+export interface IBoardId {
+  boardID: string
+}
+
+interface RowAttributes {
+  id: number;
+  text: string;
+  ColumnId?: string;
+}
+
+type RowCreationAttributes = Optional<RowAttributes, 'id'>
+
+export interface RowInstance 
+  extends Model<RowAttributes, RowCreationAttributes>, 
+  UserAttributes {
+    createdAt?: Date;
+    updatedAt?: Date;
+}
+
+export interface IRow {
+  id: number;
+  text: string;
+  ColumnId: string;
+}
+
+export interface IColumnId {
+  columnID: string
+}
