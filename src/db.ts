@@ -3,11 +3,11 @@ import { Sequelize } from "sequelize";
 const sequelize = new Sequelize(
   "railway",
   "postgres",
-  "lxCqo7rmXp1VvsYkSJbh",
+  "N765EDrhKWUi6cGEZHpv",
   {
     dialect: "postgres",
-    host: "containers-us-west-23.railway.app",
-    port: 6053,
+    host: "containers-us-west-112.railway.app",
+    port: 7566,
   }
 );
 
