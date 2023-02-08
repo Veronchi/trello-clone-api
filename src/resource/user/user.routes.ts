@@ -31,7 +31,7 @@ router.get("/auth", authMiddleware, async (req, res, next) => {
   }
 });
 
-router.patch("/", async (req, res, next) => {
+router.patch("/", authMiddleware, async (req, res, next) => {
   try {
     const updUser = await userService.update(req.body);
     res.json(updUser);
@@ -40,7 +40,7 @@ router.patch("/", async (req, res, next) => {
   }
 });
 
-router.delete("/", async (req, res, next) => {
+router.delete("/", authMiddleware, async (req, res, next) => {
   try {
     const user = await userService.remove(req.body);
     res.json(user);
