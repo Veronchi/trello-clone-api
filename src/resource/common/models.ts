@@ -1,5 +1,5 @@
 import { DataTypes } from 'sequelize';
-import { BoardInstance, UserInstance } from '../../interface';
+import { BoardInstance, ColumnInstance, RowInstance, UserInstance } from '../../interface';
 import sequelize from "../../db";
 
 const User = sequelize.define<UserInstance>("User", {
@@ -30,14 +30,14 @@ const User = sequelize.define<UserInstance>("User", {
   },
 });
 
-const Board = sequelize.define<BoardInstance>("User", {
+const Board = sequelize.define<BoardInstance>("Board", {
   id: {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
     allowNull: false,
     primaryKey: true,
   },
-  name: {
+  title: {
     type: DataTypes.STRING,
     allowNull: false,
     unique: true,
@@ -45,11 +45,44 @@ const Board = sequelize.define<BoardInstance>("User", {
   background: {
     type: DataTypes.STRING,
     allowNull: false,
-    unique: true,
   }
+});
+
+const Column = sequelize.define<ColumnInstance>("Column", {
+  id: {
+    type: DataTypes.UUID,
+    defaultValue: DataTypes.UUIDV4,
+    allowNull: false,
+    primaryKey: true,
+  },
+  title: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    unique: true,
+  },
+});
+
+const Row = sequelize.define<RowInstance>("Row", {
+  id: {
+    type: DataTypes.UUID,
+    defaultValue: DataTypes.UUIDV4,
+    allowNull: false,
+    primaryKey: true,
+  },
+  text: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    unique: true,
+  },
 });
 
 User.hasMany(Board);
 Board.belongsTo(User);
 
-export { User, Board };
+Board.hasMany(Column);
+Column.belongsTo(Board);
+
+Column.hasMany(Row);
+Row.belongsTo(Column);
+
+export { User, Board, Column, Row };
