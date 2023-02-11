@@ -37,15 +37,16 @@ async function registration(userData: IUser): Promise<string> {
 async function login(userData: IUser): Promise<string> {
   const { login, password } = userData;
   const user = await User.findOne({ where: { login } });
-
+  console.log(user);
+  
   if (!user) {
-    throw ApiError.internal("User is not found");
+    throw ApiError.badRequest("User is not found");
   }
 
   const comparePassword = await bcrypt.compare(password, user.password);
 
   if (!comparePassword) {
-    throw ApiError.internal("Invalid password or login");
+    throw ApiError.badRequest("Invalid password or login");
   }
 
   return generateJwt(user.id, user.email, user.role);
