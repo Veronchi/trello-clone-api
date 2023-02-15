@@ -8,17 +8,16 @@ async function createColumn(columnData: IColumn): Promise<ColumnInstance> {
   if (!title || !BoardId) {
     throw ApiError.badRequest("title or board not entered");
   }
-  
+
   const column = await Column.create({title, BoardId});
 
   return column;
 }
 
 async function getAllColumns(obj: IBoardId): Promise<Array<ColumnInstance>> {
-  
   const columns = await Column.findAll({ 
     where: {
-      BoardId: obj.boardID
+      BoardId: obj.data.boardID
     } 
   })
 

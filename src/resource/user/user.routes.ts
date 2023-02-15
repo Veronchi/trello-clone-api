@@ -22,6 +22,14 @@ router.post("/login", async (req, res, next) => {
   }
 });
 
+router.get("/", authMiddleware, async(req, res, next) => {
+  try {
+    res.json(await userService.getUser(res));
+  } catch (error) {
+    next(error);
+  }
+})
+
 router.get("/auth", authMiddleware, async (req, res, next) => {
   try {
     const token = await userService.check(req.body);

@@ -6,7 +6,7 @@ async function createRow(rowData: IRow): Promise<RowInstance> {
   const {text, ColumnId} = rowData;
 
   if (!text || !ColumnId) {
-    throw ApiError.badRequest("title or column not entered");
+    throw ApiError.badRequest("text or columnId not entered");
   }
   
   const row = await Row.create({text, ColumnId});
@@ -15,10 +15,9 @@ async function createRow(rowData: IRow): Promise<RowInstance> {
 }
 
 async function getAllRows(obj: IColumnId): Promise<Array<RowInstance>> {
-  
   const rows = await Row.findAll({ 
     where: {
-      ColumnId: obj.columnID
+      ColumnId: obj.data.columnID
     } 
   })
 

@@ -13,10 +13,10 @@ router.post("/createRow", authMiddleware, async (req, res, next) => {
   }
 });
 
-router.get("/rows", authMiddleware, async (req, res, next) => {
+router.post("/rows", authMiddleware, async (req, res, next) => {
   try {
     const data = await RowService.getAllRows(req.body);
-    res.json({data});
+    res.json(data);
   } catch (error) {
     next(error);
   }

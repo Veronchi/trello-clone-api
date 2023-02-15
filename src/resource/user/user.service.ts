@@ -1,3 +1,4 @@
+import express from 'express';
 import { User } from "../common/models";
 import bcrypt from "bcrypt";
 import generateJwt from "../../middleware/JwtGenerator";
@@ -52,6 +53,18 @@ async function login(userData: IUser): Promise<string> {
   return generateJwt(user.id, user.email, user.role);
 }
 
+async function getUser(res: express.Response): Promise<UserInstance> {
+  const { UserId } = res.locals.decode;
+  
+  const user = await User.findOne({ 
+    where: {
+      id: UserId
+    } 
+  })
+
+  return user as UserInstance;
+}
+
 async function check(userData: IUser): Promise<string> {
   const token = generateJwt(userData.id, userData.email, userData.role);
 
@@ -74,4 +87,4 @@ async function remove(userData: IUser): Promise<number> {
   });
 }
 
-export { registration, login, check, update, remove };
+export { registration, login, getUser, check, update, remove };

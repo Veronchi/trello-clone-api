@@ -30,6 +30,13 @@ const User = sequelize.define<UserInstance>("User", {
   },
 });
 
+User.prototype.toJSON =  function (): UserInstance {
+  const values = Object.assign({}, this.get());
+
+  delete values.password;
+  return values;
+}
+
 const Board = sequelize.define<BoardInstance>("Board", {
   id: {
     type: DataTypes.UUID,
@@ -72,8 +79,13 @@ const Row = sequelize.define<RowInstance>("Row", {
   text: {
     type: DataTypes.STRING,
     allowNull: false,
-    unique: true,
+    unique: false,
   },
+  cover: {
+    type: DataTypes.STRING,
+    allowNull: true,
+    unique: false,
+  }
 });
 
 User.hasMany(Board);

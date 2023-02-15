@@ -9,5 +9,7 @@ export default function (
     res.status(err.status).send({
       error: err.message
     })
-  } else res.status(500).send({error: err});
+  } else {
+    res.status(500).send({error: err});
+  } 
 }

@@ -74,12 +74,15 @@ export interface IColumn {
 }
 
 export interface IBoardId {
-  boardID: string
+  data: {
+   boardID: string 
+  }
 }
 
 interface RowAttributes {
   id: number;
   text: string;
+  cover?: string;
   ColumnId?: string;
 }
 
@@ -95,9 +98,12 @@ export interface RowInstance
 export interface IRow {
   id: number;
   text: string;
+  cover?: string;
   ColumnId: string;
 }
 
 export interface IColumnId {
-  columnID: string
+  data: {
+   columnID: string 
+  }
 }

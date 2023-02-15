@@ -15,8 +15,7 @@ router.post("/createBoard", authMiddleware, async (req, res, next) => {
 
 router.get("/boards", authMiddleware, async (req, res, next) => {
   try {
-    const data = await boardService.getAllBoards(res);
-    res.json({data});
+    res.json(await boardService.getAllBoards(res));
   } catch (error) {
     next(error);
   }
