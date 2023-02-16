@@ -1,6 +1,7 @@
 import { Row } from "../common/models";
-import { RowInstance, IRow, IColumnId } from "../../interface";
+import { RowInstance, IRow } from "../../interface";
 import ApiError from "../../error/ApiError";
+import { Request } from "express";
 
 async function createRow(rowData: IRow): Promise<RowInstance> {
   const {text, ColumnId} = rowData;
@@ -14,10 +15,11 @@ async function createRow(rowData: IRow): Promise<RowInstance> {
   return row;
 }
 
-async function getAllRows(obj: IColumnId): Promise<Array<RowInstance>> {
+async function getAllRows(req: Request): Promise<Array<RowInstance>> {
+  const { query } = req;
   const rows = await Row.findAll({ 
     where: {
-      ColumnId: obj.data.columnID
+      ColumnId: query.columnID as string
     } 
   })
 
