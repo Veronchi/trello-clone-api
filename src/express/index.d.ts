@@ -1,4 +1,5 @@
 import { JwtPayload } from "jsonwebtoken"
+import { IBoardId } from "../interface";
 import { Board, User } from "../resource/common/models"
 
 declare global{
@@ -8,6 +9,7 @@ declare global{
                 user: typeof User | JwtPayload;
                 board: typeof Board | JwtPayload;
                 decode: JwtPayload;
+                boardID: IBoardId;
             }
         }
     }

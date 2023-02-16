@@ -13,9 +13,9 @@ router.post("/createColumn", authMiddleware, async (req, res, next) => {
   }
 });
 
-router.post("/columns",  authMiddleware, async (req, res, next) => {
+router.get("/columns",  authMiddleware, async (req, res, next) => {
   try {
-    const data = await columnService.getAllColumns(req.body);
+    const data = await columnService.getAllColumns(req);
     res.json(data);
   } catch (error) {
     next(error);

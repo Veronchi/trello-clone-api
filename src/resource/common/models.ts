@@ -65,7 +65,7 @@ const Column = sequelize.define<ColumnInstance>("Column", {
   title: {
     type: DataTypes.STRING,
     allowNull: false,
-    unique: true,
+    unique: false,
   },
 });
 

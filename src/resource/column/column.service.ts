@@ -1,6 +1,7 @@
 import { Column } from "../common/models";
 import { ColumnInstance, IColumn, IBoardId } from "../../interface";
 import ApiError from "../../error/ApiError";
+import { Request } from "express";
 
 async function createColumn(columnData: IColumn): Promise<ColumnInstance> {
   const {title, BoardId} = columnData;
@@ -14,10 +15,11 @@ async function createColumn(columnData: IColumn): Promise<ColumnInstance> {
   return column;
 }
 
-async function getAllColumns(obj: IBoardId): Promise<Array<ColumnInstance>> {
+async function getAllColumns(req: Request): Promise<Array<ColumnInstance>> {
+  const { query } = req;
   const columns = await Column.findAll({ 
     where: {
-      BoardId: obj.data.boardID
+      BoardId: query.boardID as string
     } 
   })
 

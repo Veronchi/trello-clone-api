@@ -52,6 +52,10 @@ export interface IBoard {
   UserId: string;
 }
 
+export interface IBoardId {
+   boardID: string
+}
+
 interface ColumnAttributes {
   id: number;
   title: string;
@@ -71,12 +75,6 @@ export interface IColumn {
   id: number;
   title: string;
   BoardId: string;
-}
-
-export interface IBoardId {
-  data: {
-   boardID: string 
-  }
 }
 
 interface RowAttributes {
