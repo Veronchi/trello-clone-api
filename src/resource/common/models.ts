@@ -47,7 +47,7 @@ const Board = sequelize.define<BoardInstance>("Board", {
   title: {
     type: DataTypes.STRING,
     allowNull: false,
-    unique: true,
+    unique: false,
   },
   background: {
     type: DataTypes.STRING,
