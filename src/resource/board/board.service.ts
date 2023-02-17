@@ -1,7 +1,7 @@
 import { Board } from "../common/models";
 import { BoardInstance, IBoard } from "../../interface";
 import ApiError from "../../error/ApiError";
-import express from "express";
+import express, { Request } from "express";
 
 async function createBoard(boardData: IBoard, res: express.Response): Promise<BoardInstance> {
   const { UserId } = res.locals.decode;
@@ -36,10 +36,12 @@ async function update(boardData: IBoard): Promise<[affectedCount: number]> {
   });
 }
 
-async function remove(boardData: IBoard): Promise<number> {
+async function remove(req: Request): Promise<number> {
+  const {query} = req;
+
   return await Board.destroy({
     where: {
-      id: boardData.id,
+      id: query.id as string,
     },
   });
 }

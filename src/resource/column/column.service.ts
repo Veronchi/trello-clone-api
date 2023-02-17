@@ -1,5 +1,5 @@
 import { Column } from "../common/models";
-import { ColumnInstance, IColumn, IBoardId } from "../../interface";
+import { ColumnInstance, IColumn } from "../../interface";
 import ApiError from "../../error/ApiError";
 import { Request } from "express";
 
@@ -34,10 +34,12 @@ async function update(columnData: IColumn): Promise<[affectedCount: number]> {
   });
 }
 
-async function remove(columnData: IColumn): Promise<number> {
+async function remove(req: Request): Promise<number> {
+  const {query} = req;
+
   return await Column.destroy({
     where: {
-      id: columnData.id,
+      id: query.id as string,
     },
   });
 }

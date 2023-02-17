@@ -32,7 +32,7 @@ router.patch("/", authMiddleware, async (req, res, next) => {
 
 router.delete("/", authMiddleware, async (req, res, next) => {
   try {
-    const board = await boardService.remove(req.body);
+    const board = await boardService.remove(req);
     res.json(board);
   } catch (error) {
     next(error);

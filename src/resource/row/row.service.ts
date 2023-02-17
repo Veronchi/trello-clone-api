@@ -34,10 +34,12 @@ async function update(rowData: IRow): Promise<[affectedCount: number]> {
   });
 }
 
-async function remove(rowData: IRow): Promise<number> {
+async function remove(req: Request): Promise<number> {
+  const {query} = req;
+
   return await Row.destroy({
     where: {
-      id: rowData.id,
+      id: query.id as string,
     },
   });
 }

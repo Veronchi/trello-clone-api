@@ -33,7 +33,7 @@ router.patch("/",  authMiddleware, async (req, res, next) => {
 
 router.delete("/",  authMiddleware, async (req, res, next) => {
   try {
-    const column = await columnService.remove(req.body);
+    const column = await columnService.remove(req);
     res.json(column);
   } catch (error) {
     next(error);
