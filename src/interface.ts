@@ -60,6 +60,7 @@ interface ColumnAttributes {
   id: number;
   title: string;
   BoardId?: string;
+  UserId?: string;
 }
 
 type ColumnCreationAttributes = Optional<ColumnAttributes, 'id'>
@@ -82,6 +83,8 @@ interface RowAttributes {
   text: string;
   cover?: string;
   ColumnId?: string;
+  BoardId?: string;
+  UserId?: string;
 }
 
 type RowCreationAttributes = Optional<RowAttributes, 'id'>
@@ -98,6 +101,7 @@ export interface IRow {
   text: string;
   cover?: string;
   ColumnId: string;
+  BoardId: string;
 }
 
 export interface IColumnId {

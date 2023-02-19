@@ -1,16 +1,17 @@
 import { Column } from "../common/models";
 import { ColumnInstance, IColumn } from "../../interface";
 import ApiError from "../../error/ApiError";
-import { Request } from "express";
+import express, { Request } from "express";
 
-async function createColumn(columnData: IColumn): Promise<ColumnInstance> {
+async function createColumn(columnData: IColumn, res: express.Response): Promise<ColumnInstance> {
+  const { UserId } = res.locals.decode;
   const {title, BoardId} = columnData;
 
   if (!title || !BoardId) {
     throw ApiError.badRequest("title or board not entered");
   }
 
-  const column = await Column.create({title, BoardId});
+  const column = await Column.create({title, BoardId, UserId});
 
   return column;
 }

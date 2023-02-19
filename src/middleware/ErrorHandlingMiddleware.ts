@@ -10,6 +10,6 @@ export default function (
       error: err.message
     })
   } else {
-    res.status(500).send({error: err});
+    res.status(500).send({error: err.name});
   } 
 }

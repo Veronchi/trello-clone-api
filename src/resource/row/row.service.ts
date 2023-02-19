@@ -1,25 +1,37 @@
 import { Row } from "../common/models";
 import { RowInstance, IRow } from "../../interface";
 import ApiError from "../../error/ApiError";
-import { Request } from "express";
+import express, { Request } from "express";
 
-async function createRow(rowData: IRow): Promise<RowInstance> {
-  const {text, ColumnId} = rowData;
+async function createRow(rowData: IRow, res: express.Response): Promise<RowInstance> {
+  const { UserId } = res.locals.decode;
+  const {text, ColumnId, BoardId} = rowData;
 
   if (!text || !ColumnId) {
     throw ApiError.badRequest("text or columnId not entered");
   }
   
-  const row = await Row.create({text, ColumnId});
+  const row = await Row.create({text, ColumnId, BoardId, UserId});
 
   return row;
 }
 
-async function getAllRows(req: Request): Promise<Array<RowInstance>> {
+async function getAllRowsByColumn(req: Request): Promise<Array<RowInstance>> {
   const { query } = req;
   const rows = await Row.findAll({ 
     where: {
       ColumnId: query.columnID as string
+    } 
+  })
+
+  return rows;
+}
+
+async function getAllRowsByBoard(req: Request): Promise<Array<RowInstance>> {
+  const { query } = req;
+  const rows = await Row.findAll({ 
+    where: {
+      BoardId: query.boardId as string
     } 
   })
 
@@ -44,4 +56,4 @@ async function remove(req: Request): Promise<number> {
   });
 }
 
-export { createRow, getAllRows, update, remove };
+export { createRow, getAllRowsByColumn, getAllRowsByBoard, update, remove };

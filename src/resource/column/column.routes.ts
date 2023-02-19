@@ -6,7 +6,7 @@ const router = Express.Router();
 
 router.post("/createColumn", authMiddleware, async (req, res, next) => {
   try {
-    const result = await columnService.createColumn(req.body);
+    const result = await columnService.createColumn(req.body, res);
     res.json(result);
   } catch (error) {
     next(error);

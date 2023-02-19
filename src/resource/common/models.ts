@@ -88,13 +88,28 @@ const Row = sequelize.define<RowInstance>("Row", {
   }
 });
 
-User.hasMany(Board);
+User.hasMany(Board, {
+  onDelete: 'CASCADE'
+});
 Board.belongsTo(User);
 
-Board.hasMany(Column);
+User.hasMany(Column);
+Column.belongsTo(User);
+
+User.hasMany(Row);
+Row.belongsTo(User);
+
+Board.hasMany(Column, {
+  onDelete: 'CASCADE'
+});
 Column.belongsTo(Board);
 
-Column.hasMany(Row);
+Board.hasMany(Row);
+Row.belongsTo(Board)
+
+Column.hasMany(Row, {
+  onDelete: 'CASCADE'
+});
 Row.belongsTo(Column);
 
 export { User, Board, Column, Row };

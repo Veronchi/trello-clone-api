@@ -6,7 +6,7 @@ const router = Express.Router();
 
 router.post("/createRow", authMiddleware, async (req, res, next) => {
   try {
-    const result = await RowService.createRow(req.body);
+    const result = await RowService.createRow(req.body, res);
     res.json(result);
   } catch (error) {
     next(error);
@@ -15,7 +15,16 @@ router.post("/createRow", authMiddleware, async (req, res, next) => {
 
 router.get("/rows", authMiddleware, async (req, res, next) => {
   try {
-    const data = await RowService.getAllRows(req);
+    const data = await RowService.getAllRowsByColumn(req);
+    res.json(data);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get("/rowsByBoardId", authMiddleware, async (req, res, next) => {
+  try {
+    const data = await RowService.getAllRowsByBoard(req);
     res.json(data);
   } catch (error) {
     next(error);
