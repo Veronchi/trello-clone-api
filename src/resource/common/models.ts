@@ -28,6 +28,11 @@ const User = sequelize.define<UserInstance>("User", {
     defaultValue: "user",
     allowNull: false,
   },
+  avatar: {
+    type: DataTypes.STRING,
+    defaultValue: "",
+    allowNull: true,
+  },
 });
 
 User.prototype.toJSON =  function (): UserInstance {
@@ -67,6 +72,11 @@ const Column = sequelize.define<ColumnInstance>("Column", {
     allowNull: false,
     unique: false,
   },
+  order: {
+    type: DataTypes.INTEGER,
+    allowNull: true,
+    unique: false,
+  }
 });
 
 const Row = sequelize.define<RowInstance>("Row", {

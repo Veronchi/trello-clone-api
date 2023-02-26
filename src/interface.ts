@@ -6,6 +6,7 @@ interface UserAttributes {
   password: string;
   email: string;
   role: string;
+  avatar?: string;
 }
 
 type UserCreationAttributes = Optional<UserAttributes, 'id'>
@@ -23,6 +24,7 @@ export interface IUser {
   email: string;
   password: string;
   role: string;
+  avatar?: string;
 }
 
 export interface IUserId {
@@ -59,6 +61,7 @@ export interface IBoardId {
 interface ColumnAttributes {
   id: number;
   title: string;
+  order?: number;
   BoardId?: string;
   UserId?: string;
 }
@@ -75,6 +78,7 @@ export interface ColumnInstance
 export interface IColumn {
   id: number;
   title: string;
+  order?: number;
   BoardId: string;
 }
 
