@@ -86,6 +86,7 @@ interface RowAttributes {
   id: number;
   text: string;
   cover?: string;
+  opacity?: boolean
   ColumnId?: string;
   BoardId?: string;
   UserId?: string;
@@ -104,6 +105,7 @@ export interface IRow {
   id: number;
   text: string;
   cover?: string;
+  opacity?: boolean
   ColumnId: string;
   BoardId: string;
 }

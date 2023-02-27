@@ -95,6 +95,12 @@ const Row = sequelize.define<RowInstance>("Row", {
     type: DataTypes.STRING,
     allowNull: true,
     unique: false,
+  },
+  opacity: {
+    type: DataTypes.BOOLEAN,
+    allowNull: true,
+    defaultValue: true,
+    unique: false,
   }
 });
 
