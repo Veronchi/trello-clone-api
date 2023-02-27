@@ -31,7 +31,7 @@ router.get("/rowsByBoardId", authMiddleware, async (req, res, next) => {
   }
 });
 
-router.patch("/", authMiddleware, async (req, res, next) => {
+router.put("/", authMiddleware, async (req, res, next) => {
   try {
     const updColumn = await RowService.update(req.body);
     res.json(updColumn);

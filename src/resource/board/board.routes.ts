@@ -21,7 +21,7 @@ router.get("/boards", authMiddleware, async (req, res, next) => {
   }
 });
 
-router.patch("/", authMiddleware, async (req, res, next) => {
+router.put("/", authMiddleware, async (req, res, next) => {
   try {
     const updBoard = await boardService.update(req.body);
     res.json(updBoard);

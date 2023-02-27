@@ -22,7 +22,7 @@ router.get("/columns",  authMiddleware, async (req, res, next) => {
   }
 });
 
-router.patch("/",  authMiddleware, async (req, res, next) => {
+router.put("/",  authMiddleware, async (req, res, next) => {
   try {
     const updColumn = await columnService.update(req.body);
     res.json(updColumn);

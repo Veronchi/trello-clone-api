@@ -39,7 +39,7 @@ router.get("/auth", authMiddleware, async (req, res, next) => {
   }
 });
 
-router.patch("/", authMiddleware, async (req, res, next) => {
+router.put("/", authMiddleware, async (req, res, next) => {
   try {
     const updUser = await userService.update(req.body);
     res.json(updUser);
