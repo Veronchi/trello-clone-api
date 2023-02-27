@@ -9,8 +9,8 @@ import { IUser, UserInstance } from "../../interface";
 async function registration(userData: IUser): Promise<string> {
   const { login, email, password, role } = userData;
 
-  if (!login || !password) {
-    throw ApiError.badRequest("login or password not entered");
+  if (!login || !password || !email) {
+    throw ApiError.badRequest("login, email or password not entered");
   }
 
   const condidateEmail = await User.findOne({ where: { email } });
