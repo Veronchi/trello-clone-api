@@ -38,7 +38,6 @@ async function registration(userData: IUser): Promise<string> {
 async function login(userData: IUser): Promise<string> {
   const { login, password } = userData;
   const user = await User.findOne({ where: { login } });
-  console.log(user);
   
   if (!user) {
     throw ApiError.badRequest("User is not found");
